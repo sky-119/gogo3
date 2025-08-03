@@ -1,0 +1,176 @@
+:root {
+    --roulette-size: 350px;
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --background-color: #f8f9fa;
+    --text-color-light: #fff;
+    --text-color-dark: #343a40;
+    --border-color: #dee2e6;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: var(--background-color);
+    color: var(--text-color-dark);
+    text-align: center;
+}
+
+.container {
+    padding: 30px;
+    background: var(--text-color-light);
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    max-width: 95%;
+    width: 600px;
+}
+
+h1 {
+    color: var(--primary-color);
+    margin-bottom: 25px;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.option-input {
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.option-input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+.roulette-wrapper {
+    position: relative;
+    width: var(--roulette-size);
+    height: var(--roulette-size);
+    margin: 0 auto 30px;
+}
+
+#roulette-wheel {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(to right, #fdd835, #ff9800, #f44336, #e91e63, #9c27b0, #673ab7, #3f51b5, #2196f3, #03a9f4, #00bcd4, #009688, #4caf50);
+    border: 6px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    transition: transform 6s cubic-bezier(0.1, 0.7, 0.5, 1);
+}
+
+#roulette-wheel.spinning {
+    transition: none;
+}
+
+.roulette-segment {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 50%;
+    transform-origin: 100% 100%;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.segment-content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotate(calc(var(--rotation-offset) * 1deg));
+}
+
+.roulette-segment-text {
+    color: var(--text-color-light);
+    font-weight: bold;
+    font-size: 1.2em;
+    text-align: center;
+    padding: 10px;
+    transform: rotate(90deg);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 90%;
+}
+
+.pointer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) translateY(calc(-50% - 8px));
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 25px solid var(--primary-color);
+    z-index: 10;
+}
+
+.result-display {
+    margin-top: 20px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+#spin-button {
+    padding: 14px 35px;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--text-color-light);
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+    transition: background-color 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#spin-button:hover {
+    background-color: #0056b3;
+}
+
+#spin-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.5);
+}
+
+/* 모바일 최적화 */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+    :root {
+        --roulette-size: 280px;
+    }
+    .roulette-segment-text {
+        font-size: 1em;
+    }
+    #spin-button {
+        font-size: 16px;
+    }
+}
